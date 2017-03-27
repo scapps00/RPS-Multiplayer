@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en-us">
+	<meta charset="UTF-8">
+	<title>Play Rock Paper Scissors Lizard Spock!</title>
+	<link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="assets/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12" id="intro">Rock.Paper.Scissors.Lizard.Spock</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-4 choices">
+			<div class="row">
+				Rock
+				<br>
+				<img src="assets/images/rock.png" alt="rock">
+			</div>
+			<div class="row">
+				Paper
+				<br>
+				<img src="assets/images/paper.png" alt="paper">
+			</div>
+			<div class="row">
+				Scissors
+				<br>
+				<img src="assets/images/scissors.png" alt="scissors">
+			</div>
+			<div class="row">
+				Lizard
+				<br>
+				<img src="assets/images/lizard.png" alt="lizard">
+			</div>
+			<div class="row">
+				Spock
+				<br>
+				<img src="assets/images/spock.png" alt="Spock">
+			</div>
+		</div>
+		<div class="col-xs-4 status">
+			<span class="yrName"></span>'s Wins:
+			<br>
+			<span id="yrWins"></span>
+			<br>
+			Opponent's Wins:
+			<br>
+			<span id="opWins"></span>
+			<br>
+			<span class="yrName"></span>'s Choice:
+			<br>
+			<span id="yrChoice"></span>
+			<br>
+			Opponent's Choice:
+			<br>
+			<span id="opChoice"></span>
+			<br>
+			<span id="outcome"></span>
+		</div>
+		<div class="col-xs-4">
+		</div>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
+<script src="assets/js/game.js"></script>
+</html>

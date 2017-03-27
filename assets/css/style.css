@@ -1,0 +1,33 @@
+body {
+	background-image: url("../images/grey_wash_wall.png");
+	font-family: 'Amatic SC', cursive;
+	color: white;
+	text-align: center;
+	font-size: 100px;
+}
+
+.choices {
+	font-size: 50px;
+}
+
+img {
+	width: 200px;
+}
+
+.status {
+	font-size: 50px;
+}
+
+#enterText {
+	font-size: 50px;
+}
+
+#name {
+	color: black;
+	font-size: 50px;
+}
+
+#submit {
+	color: black;
+	font-size: 50px;
+}
