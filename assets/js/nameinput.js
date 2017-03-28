@@ -11,7 +11,8 @@
 
  database.ref().on("value", function(snapshot) {
  	if (snapshot.val().playerInfo.numPlayers == "0") {
- 		$("#submit").click(function() {
+ 		sessionStorage.setItem("playerNum", "1");
+ 		$("#submit").on("click touchstart", function() {
  			database.ref("playerInfo").set({
 				name2: snapshot.val().playerInfo.name2,
 				score1: snapshot.val().playerInfo.score1,
@@ -22,8 +23,9 @@
      	location.replace("game.html");
  		});
  	}
- 	if (snapshot.val().numPlayers == "1") {
- 		$("#submit").click(function() {
+ 	else if (snapshot.val().playerInfo.numPlayers == "1") {
+ 		$("#submit").on("click touchstart", function() {
+ 			sessionStorage.setItem("playerNum", "2");
  			database.ref("playerInfo").set({
  				name1: snapshot.val().playerInfo.name1,
 				score1: snapshot.val().playerInfo.score1,
