@@ -10,9 +10,12 @@
  var database = firebase.database();
 
  database.ref().on("value", function(snapshot) {
- 	if (snapshot.val().numPlayers == "0") {
+ 	if (snapshot.val().playerInfo.numPlayers == "0") {
  		$("#submit").click(function() {
- 			database.ref().set({
+ 			database.ref("playerInfo").set({
+				name2: snapshot.val().playerInfo.name2,
+				score1: snapshot.val().playerInfo.score1,
+				score2: snapshot.val().playerInfo.score2,
        			name1: $("#name").val(),
        			numPlayers: "1"
      		});
@@ -21,7 +24,10 @@
  	}
  	if (snapshot.val().numPlayers == "1") {
  		$("#submit").click(function() {
- 			database.ref().set({
+ 			database.ref("playerInfo").set({
+ 				name1: snapshot.val().playerInfo.name1,
+				score1: snapshot.val().playerInfo.score1,
+				score2: snapshot.val().playerInfo.score2,
        			name2: $("#name").val(),
        			numPlayers: "2"
      		});
