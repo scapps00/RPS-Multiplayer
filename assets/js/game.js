@@ -23,10 +23,11 @@ if (sessionStorage.getItem("playerNum") == "1") {
 		$(".opName").text(snapshot.val().playerInfo.name2);
 		$("#yrWins").text(snapshot.val().playerInfo.score1);
 		$("#opWins").text(snapshot.val().playerInfo.score2);
+		$("#message").text(snapshot.val().status1.message1);
 		var move1 = snapshot.val().move1.move1;
 		var move2 = snapshot.val().move2.move2;
-		$("#yrChoice").text(move1);
-		$("#opChoice").text(move2);
+		$("#yrChoice").text(snapshot.val().move1.move1);
+		$("#opChoice").text(snapshot.val().move2.move2);
 		//$("#" + $("#opChoice").text()).css("background-color", "red");
 
 
@@ -48,18 +49,21 @@ if (sessionStorage.getItem("playerNum") == "1") {
 				else if (move1 == "spock") {
 					pickSpock1(move2);
 				}
-				if ($("#message") != "") {
-					setTimeout(nextRound1, 3000);
+			 	if ($("#message").text() !== "") {
+					setTimeout(nextRound1, 4000);
 				}
 			
 	}
 
 	function action1() {
-		$("#rock").on("click touchstart", function() {rock1()});
-		$("#paper").on("click touchstart", function() {paper1()});
-		$("#scissors").on("click touchstart", function() {scissors1()});
-		$("#lizard").on("click touchstart", function() {lizard1()});
-		$("#spock").on("click touchstart", function() {spock1()});
+		setTimeout(function() {
+			$("#rock").on("click touchstart", function() {rock1()});
+			$("#paper").on("click touchstart", function() {paper1()});
+			$("#scissors").on("click touchstart", function() {scissors1()});
+			$("#lizard").on("click touchstart", function() {lizard1()});
+			$("#spock").on("click touchstart", function() {spock1()});
+		}, 4000);
+
 	}
 
 	function rock1() {
@@ -139,8 +143,14 @@ if (sessionStorage.getItem("playerNum") == "1") {
 	    	database.ref("move2").set({
 				move2: ""
 	    	});
+	    	database.ref("status1").set({
+	    		message1: ""
+	    	})
+	    	database.ref("status2").set({
+	    		message2: ""
+	    	})
 			//$("#rock #paper #scissors #lizard #spock").css("background-color", "transparent");
-			$("#message, #yrChoice, #opChoice").text("");
+			//$("#message, #yrChoice, #opChoice").text("");
 
 	}
 
@@ -152,7 +162,12 @@ if (sessionStorage.getItem("playerNum") == "1") {
 			score2: snapshot.val().playerInfo.score2,
 		    numPlayers: snapshot.val().playerInfo.numPlayers
 	    });
-	    $("#message").text("You win!");
+	    database.ref("status1").set({
+	    	message1: "You win!"
+	    });
+	    database.ref("status2").set({
+				message2: "You lose!"
+			});
 	}
 
 	function lose1() {
@@ -163,76 +178,106 @@ if (sessionStorage.getItem("playerNum") == "1") {
 			score2: snapshot.val().playerInfo.score2 + 1,
 		    numPlayers: snapshot.val().playerInfo.numPlayers
 	    });
-	    $("#message").text("You lose!");
+	    database.ref("status1").set({
+	    	message1: "You lose!"
+	    });
+	    database.ref("status2").set({
+				message2: "You lose!"
+			});
 	    	}
 
 	function pickRock1(move2) {
-		if (move2 == "rock") {
-			$("#message").text("You tie!");
-		} else if (move2 == "paper") {
+		if (move2 === "rock") {
+			database.ref("status1").set({
+				message1: "You tied!"
+			});
+			database.ref("status2").set({
+				message2: "You tied!"
+			});
+		} else if (move2 === "paper") {
 			lose1();
-		} else if (move2 == "scissors") {
+		} else if (move2 === "scissors") {
 			win1();
-		} else if (move2 == "lizard") {
+		} else if (move2 === "lizard") {
 			win1();
-		} else if (move2 == "spock") {
+		} else if (move2 === "spock") {
 			lose1();
 		}
 	}
 
 	function pickPaper1(move2) {
-		if (move2 == "rock") {
+		if (move2 === "rock") {
 			win1();
-		} else if (move2 == "paper") {
-			$("#message").text("You lose!");
-		} else if (move2 == "scissors") {
+		} else if (move2 === "paper") {
+			database.ref("status1").set({
+				message1: "You tied!"
+			});
+			database.ref("status2").set({
+				message2: "You tied!"
+			});
+		} else if (move2 === "scissors") {
 			lose1();
-		} else if (move2 == "lizard") {
+		} else if (move2 === "lizard") {
 			lose1();
-		} else if (move2 == "spock") {
+		} else if (move2 === "spock") {
 			win1();
 		}
 	}
 
 	function pickScissors1(move2) {
-		if (move2 == "rock") {
+		if (move2 === "rock") {
 			lose1();
-		} else if (move2 == "paper") {
+		} else if (move2 === "paper") {
 			win1();
-		} else if (move2 == "scissors") {
-			$("#message").text("You tie!");
-		} else if (move2 == "lizard") {
+		} else if (move2 === "scissors") {
+			database.ref("status1").set({
+				message1: "You tied!"
+			});
+			database.ref("status2").set({
+				message2: "You tied!"
+			});
+		} else if (move2 === "lizard") {
 			win1();
-		} else if (move2 == "spock") {
+		} else if (move2 === "spock") {
 			lose1();
 		}
 	}
 
 	function pickLizard1(move2) {
-		if (move2 == "rock") {
+		if (move2 === "rock") {
 			lose1();
-		} else if (move2 == "paper") {
+		} else if (move2 === "paper") {
 			win1();
-		} else if (move2 == "scissors") {
+		} else if (move2 === "scissors") {
 			lose1();
-		} else if (move2 == "lizard") {
-			$("#message").text("You tie!");
-		} else if (move2 == "spock") {
+		} else if (move2 === "lizard") {
+			database.ref("status1").set({
+				message1: "You tied!"
+			});
+			database.ref("status2").set({
+				message2: "You tied!"
+			});
+		} else if (move2 === "spock") {
 			lose1();
 		}
 	}
 
 	function pickSpock1(move2) {
-		if (move2 == "rock") {
+		if (move2 === "rock") {
 			win1();
-		} else if (move2 == "paper") {
+		} else if (move2 === "paper") {
 			lose1();
-		} else if (move2 == "scissors") {
+		} else if (move2 === "scissors") {
 			win1();
-		} else if (move2 == "lizard") {
+		} else if (move2 === "lizard") {
 			lose1();
-		} else if (move2 == "spock") {
-			$("#message").text("You tie!");
+		} else if (move2 === "spock") {
+			database.ref("status1").set({
+				message1: "You tied!"
+			});
+			database.ref("status2").set({
+				message2: "You tied!"
+			});
 		}
 	}
 }
@@ -243,10 +288,11 @@ if (sessionStorage.getItem("playerNum") == "2") {
 		$(".opName").text(snapshot.val().playerInfo.name1);
 		$("#yrWins").text(snapshot.val().playerInfo.score2);
 		$("#opWins").text(snapshot.val().playerInfo.score1);
+		$("#message").text(snapshot.val().status2.message2);
 		var move1 = snapshot.val().move1.move1;
 		var move2 = snapshot.val().move2.move2;
-		$("#yrChoice").text(move2);
-		$("#opChoice").text(move1);
+		$("#yrChoice").text(snapshot.val().move2.move2);
+		$("#opChoice").text(snapshot.val().move1.move1);
 		//$("#" + $("#opChoice").text()).css("background-color", "red");
 
 
@@ -269,18 +315,20 @@ if (sessionStorage.getItem("playerNum") == "2") {
 				else if (move2 == "spock") {
 					pickSpock2(move1);
 				}
-				if ($("#message").text() != "") {
-				setTimeout(nextRound2, 3000);
-			}
+			 // 	if ($("#message").text() !== "") {
+				// 	setTimeout(nextRound2, 6000);
+				// }
 
 	}
 
 	function action2() {
-		$("#rock").on("click touchstart", function() {rock2()});
-		$("#paper").on("click touchstart", function() {paper2()});
-		$("#scissors").on("click touchstart", function() {scissors2()});
-		$("#lizard").on("click touchstart", function() {lizard2()});
-		$("#spock").on("click touchstart", function() {spock2()});
+		setTimeout(function() {
+			$("#rock").on("click touchstart", function() {rock2()});
+			$("#paper").on("click touchstart", function() {paper2()});
+			$("#scissors").on("click touchstart", function() {scissors2()});
+			$("#lizard").on("click touchstart", function() {lizard2()});
+			$("#spock").on("click touchstart", function() {spock2()});
+		}, 4000);
 	}
 
 	function rock2() {
@@ -350,92 +398,139 @@ if (sessionStorage.getItem("playerNum") == "2") {
 
 	action2();
 
-	function nextRound2() {
-		database.ref("move1").set({
-				move1: ""
-	    	});
-	    	database.ref("move2").set({
-				move2: ""
-	    	});
-		//$("#rock #paper #scissors #lizard #spock").css("background-color", "transparent");
-		$("#message, #yrChoice, #opChoice").text("");
-	}
+	// function nextRound2() {
+	// 		database.ref("move1").set({
+	// 			move1: ""
+	//     	});
+	//     	database.ref("move2").set({
+	// 			move2: ""
+	//     	});
+	// 	//$("#rock #paper #scissors #lizard #spock").css("background-color", "transparent");
+	// 	$("#message, #yrChoice, #opChoice").text("");
+	// 	//action2();
+	// }
 
 	function win2() {
-		$("#message").text("You win!");
+	    database.ref("status2").set({
+	    	message2: "You win!"
+	    });
+	    database.ref("status1").set({
+	    	message1: "You lose!"
+	    });
+	    database.ref("playerInfo").set({
+			name1: snapshot.val().playerInfo.name1,
+			name2: snapshot.val().playerInfo.name2,
+			score1: snapshot.val().playerInfo.score1,
+			score2: snapshot.val().playerInfo.score2 + 1,
+		    numPlayers: snapshot.val().playerInfo.numPlayers
+	    });
 	}
 
 	function lose2() {
-		$("#message").text("You lose!");
+	    database.ref("status2").set({
+	    	message2: "You lose!"
+	    });
+	    database.ref("status1").set({
+	    	message1: "You win!"
+	    });
+	    database.ref("playerInfo").set({
+			name1: snapshot.val().playerInfo.name1,
+			name2: snapshot.val().playerInfo.name2,
+			score1: snapshot.val().playerInfo.score1 + 1,
+			score2: snapshot.val().playerInfo.score2,
+		    numPlayers: snapshot.val().playerInfo.numPlayers
+	    });
 	}
 
 	function pickRock2(move1) {
-		if (move1 == "rock") {
-			$("#message").text("You tie!");
-		} else if (move1 == "paper") {
+		if (move1 === "rock") {
+			database.ref("status2").set({
+				message2: "You tied!"
+			});
+		} else if (move1 === "paper") {
 			lose2();
-		} else if (move1 == "scissors") {
+		} else if (move1 === "scissors") {
 			win2();
-		} else if (move1 == "lizard") {
+		} else if (move1 === "lizard") {
 			win2();
-		} else if (move1 == "spock") {
+		} else if (move1 === "spock") {
 			lose2();
 		}
 	}
 
 	function pickPaper2(move1) {
-		if (move1 == "rock") {
+		if (move1 === "rock") {
 			win2();
-		} else if (move1 == "paper") {
-			$("#message").text("You lose!");
-		} else if (move1 == "scissors") {
+		} else if (move1 === "paper") {
+			database.ref("status2").set({
+				message2: "You tied!"
+			});
+			database.ref("status1").set({
+		    	message1: "You tied!"
+		    });
+		} else if (move1 === "scissors") {
 			lose2();
-		} else if (move1 == "lizard") {
+		} else if (move1 === "lizard") {
 			lose2();
-		} else if (move1 == "spock") {
+		} else if (move1 === "spock") {
 			win2();
 		}
 	}
 
 	function pickScissors2(move1) {
-		if (move1 == "rock") {
+		if (move1 === "rock") {
 			lose2();
-		} else if (move1 == "paper") {
+		} else if (move1 === "paper") {
 			win2();
-		} else if (move1 == "scissors") {
-			$("#message").text("You tie!");
-		} else if (move1 == "lizard") {
+		} else if (move1 === "scissors") {
+			database.ref("status2").set({
+				message2: "You tied!"
+			});
+			database.ref("status1").set({
+		    	message1: "You tied!"
+		    });
+		} else if (move1 === "lizard") {
 			win2();
-		} else if (move1 == "spock") {
+		} else if (move1 === "spock") {
 			lose2();
 		}
 	}
 
 	function pickLizard2(move1) {
-		if (move1 == "rock") {
+		if (move1 === "rock") {
 			lose2();
-		} else if (move1 == "paper") {
+		} else if (move1 === "paper") {
 			win2();
-		} else if (move1 == "scissors") {
+		} else if (move1 === "scissors") {
 			lose2();
-		} else if (move1 == "lizard") {
-			$("#message").text("You tie!");
-		} else if (move1 == "spock") {
+		} else if (move1 === "lizard") {
+			database.ref("status2").set({
+				message2: "You tied!"
+			});
+			database.ref("status1").set({
+		    	message1: "You tied!"
+		    });
+		} else if (move1 === "spock") {
 			lose2();
 		}
 	}
 
 	function pickSpock2(move1) {
-		if (move1 == "rock") {
+		if (move1 === "rock") {
 			win2();
-		} else if (move1 == "paper") {
+		} else if (move1 === "paper") {
 			lose2();
-		} else if (move1 == "scissors") {
+		} else if (move1 === "scissors") {
 			win2();
-		} else if (move1 == "lizard") {
+		} else if (move1 === "lizard") {
 			lose2();
-		} else if (move1 == "spock") {
-			$("#message").text("You tie!");
+		} else if (move1 === "spock") {
+			database.ref("status2").set({
+				message2: "You tied!"
+			});
+			database.ref("status1").set({
+		    	message1: "You tied!"
+		    });
 		}
 	}
 
@@ -457,6 +552,14 @@ if (sessionStorage.getItem("playerNum") == "2") {
 	    	database.ref("move2").set({
 				move2: ""
 	    	});
+	    	database.ref("chat").set({
+	    	});
+	    	database.ref("status1").set({
+	    		message1: ""
+	    	});
+	    	database.ref("status2").set({
+	    		message2: ""
+	    	});
 		} else if (snapshot.val().playerInfo.numPlayers == "1") {
 			database.ref("playerInfo").set({
 				name1: snapshot.val().playerInfo.name1,
@@ -471,8 +574,30 @@ if (sessionStorage.getItem("playerNum") == "2") {
 	    	database.ref("move2").set({
 				move2: ""
 	    	});
+	    	database.ref("chat").set({
+	    	});
+	    	database.ref("status1").set({
+	    		message1: ""
+	    	});
+	    	database.ref("status2").set({
+	    		message2: ""
+	    	});
 		}
 	
 	};
 });
+
+function chat() {
+	database.ref("chat").push({
+		content: $("#yrName").text() + ": " + $("#chatInput").val()
+	});
+	$("#chatInput").val("");
+}
+
+database.ref("chat").on("child_added", function(snapshot) {
+	$("#chatContent").append("<br>" + snapshot.val().content);
+});
+
+$("#chatSubmit").on("click touchstart", function() {chat()});
+
 });
