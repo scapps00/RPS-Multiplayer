@@ -56,3 +56,6 @@ img {
 	height: 50px;
 	font-size: 40px;
 }
+#hidden1, #hidden2, #win1, #win2 {
+	visibility: hidden;
+}
