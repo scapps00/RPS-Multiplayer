@@ -56,6 +56,6 @@ img {
 	height: 50px;
 	font-size: 40px;
 }
-#hidden1, #hidden2, #win1, #win2 {
+#hidden1, #hidden2, #hidden3, #hidden4, #numPlayers {
 	visibility: hidden;
 }
