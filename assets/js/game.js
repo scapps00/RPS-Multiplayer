@@ -39,10 +39,6 @@ database.ref().on("value", function(snapshot) {
 		$("#hidden2").text(snapshot.val().move2.move2);
 		$("#numPlayers").text(snapshot.val().playerInfo.numPlayers);
 
-		if (snapshot.val().move1.move1 !== "0") {
-			$(".selectChoice").attr("class", "row selectChoice");
-		}
-
 		function restartColors() {
 			$("#rock").css("background-color", "transparent");
 	    	$("#paper").css("background-color", "transparent");
@@ -56,6 +52,9 @@ database.ref().on("value", function(snapshot) {
 
 		function restartClicks() {
 			setTimeout(action1, 4000);
+			setTimeout(function(){
+				$(".selectChoice").attr("class", "row selectChoice hvr-bounce-in");
+			}, 4000);
 		}
 
 		if (indicColors1 == 0){
@@ -345,6 +344,7 @@ database.ref().on("value", function(snapshot) {
 			$("#lizard").off("click");
 			$("#spock").off("click");
 			document.getElementById("rockSound").play();
+			$(".selectChoice").attr("class", "row selectChoice");
 			compare1();
 		}
 
@@ -359,6 +359,7 @@ database.ref().on("value", function(snapshot) {
 			$("#lizard").off("click");
 			$("#spock").off("click");
 			document.getElementById("paperSound").play();
+			$(".selectChoice").attr("class", "row selectChoice");
 			compare1();
 		}
 
@@ -373,6 +374,7 @@ database.ref().on("value", function(snapshot) {
 			$("#lizard").off("click");
 			$("#spock").off("click");
 			document.getElementById("scissorsSound").play();
+			$(".selectChoice").attr("class", "row selectChoice");
 			compare1();
 		}
 
@@ -387,6 +389,7 @@ database.ref().on("value", function(snapshot) {
 			$("#lizard").off("click");
 			$("#spock").off("click");
 			document.getElementById("lizardSound").play();
+			$(".selectChoice").attr("class", "row selectChoice");
 			compare1();
 		}
 
@@ -401,6 +404,7 @@ database.ref().on("value", function(snapshot) {
 			$("#lizard").off("click");
 			$("#spock").off("click");
 			document.getElementById("spockSound").play();
+			$(".selectChoice").attr("class", "row selectChoice");
 			compare1();
 		}
 	}
@@ -419,11 +423,6 @@ database.ref().on("value", function(snapshot) {
 		$("#hidden2").text(snapshot.val().move2.move2);
 		$("#numPlayers").text(snapshot.val().playerInfo.numPlayers);
 
-
-		if (snapshot.val().move1.move1 !== "0") {
-			$(".selectChoice").attr("class", "row selectChoice");
-		}
-
 		function restartColors() {
 			$("#rock").css("background-color", "transparent");
 	    	$("#paper").css("background-color", "transparent");
@@ -437,6 +436,9 @@ database.ref().on("value", function(snapshot) {
 
 		function restartClicks() {
 			setTimeout(action2, 4000);
+			setTimeout(function() {
+				$(".selectChoice").attr("class", "row selectChoice hvr-bounce-in");
+			}, 4000);
 		}
 
 		if (indicColors2 == 0) {
@@ -516,6 +518,7 @@ database.ref().on("value", function(snapshot) {
 			$("#lizard").off("click");
 			$("#spock").off("click");
 			document.getElementById("rockSound").play();
+			$(".selectChoice").attr("class", "row selectChoice");
 			compare2();
 		}
 
@@ -530,6 +533,7 @@ database.ref().on("value", function(snapshot) {
 			$("#lizard").off("click");
 			$("#spock").off("click");
 			document.getElementById("paperSound").play();
+			$(".selectChoice").attr("class", "row selectChoice");
 			compare2();
 		}
 
@@ -544,6 +548,7 @@ database.ref().on("value", function(snapshot) {
 			$("#lizard").off("click");
 			$("#spock").off("click");
 			document.getElementById("scissorsSound").play();
+			$(".selectChoice").attr("class", "row selectChoice");
 			compare2();
 		}
 
@@ -558,6 +563,7 @@ database.ref().on("value", function(snapshot) {
 			$("#lizard").off("click");
 			$("#spock").off("click");
 			document.getElementById("lizardSound").play();
+			$(".selectChoice").attr("class", "row selectChoice");
 			compare2();
 		}
 
@@ -572,6 +578,7 @@ database.ref().on("value", function(snapshot) {
 			$("#lizard").off("click");
 			$("#spock").off("click");
 			document.getElementById("spockSound").play();
+			$(".selectChoice").attr("class", "row selectChoice");
 			compare2();
 		}
 
