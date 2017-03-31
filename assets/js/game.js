@@ -10,6 +10,10 @@ var config = {
 
 var database = firebase.database();
 
+$("#rules").click(function() {
+	alert("SCISSORS CUT PAPER\nPAPER COVERS ROCK\nROCK CRUSHES LIZARD\nLIZARD POISONS SPOCK\nSPOCK SMASHES SCISSORS\nSCISSORS DECAPITATE LIZARD\nLIZARD EATS PAPER\nPAPER DISPROVES SPOCK\nSPOCK VAPORIZES ROCK\nROCK CRUSHES SCISSORS");
+})
+
 var move1 = "";
 var move2 = "";
 //indic variables used to manually prevent certain functions from happening more than once
@@ -18,6 +22,8 @@ var indicColors1 = 0;
 var indicColors2 = 0;
 
 database.ref().on("value", function(snapshot) {
+
+
 
 	if (sessionStorage.getItem("playerNum") == "1") {
 		$(".yrName").text(snapshot.val().playerInfo.name1);
@@ -32,6 +38,10 @@ database.ref().on("value", function(snapshot) {
 		$("#hidden1").text(snapshot.val().move1.move1);
 		$("#hidden2").text(snapshot.val().move2.move2);
 		$("#numPlayers").text(snapshot.val().playerInfo.numPlayers);
+
+		if (snapshot.val().move1.move1 !== "0") {
+			$(".selectChoice").attr("class", "row selectChoice");
+		}
 
 		function restartColors() {
 			$("#rock").css("background-color", "transparent");
@@ -77,7 +87,10 @@ database.ref().on("value", function(snapshot) {
 			 }
 		}
 
-		$("#clickToStart").click(function() {action1()});
+		$("#clickToStart").click(function() {
+			action1();
+			$(".selectChoice").attr("class", "row selectChoice hvr-bounce-in");
+		});
 
 		function action1() {
 			$("#rock").on("click", function() {rock1()});
@@ -114,6 +127,7 @@ database.ref().on("value", function(snapshot) {
 	    	$("#spock").css("background-color", "transparent");
 	    	$("#hidden1").text("");
 	    	$("#hidden2").text("");
+	    	$(".selectChoice").attr("class", "row selectChoice")
 	    	indic = 0;
 	    	action1();
 		}
@@ -330,6 +344,7 @@ database.ref().on("value", function(snapshot) {
 			$("#scissors").off("click");
 			$("#lizard").off("click");
 			$("#spock").off("click");
+			document.getElementById("rockSound").play();
 			compare1();
 		}
 
@@ -343,6 +358,7 @@ database.ref().on("value", function(snapshot) {
 			$("#scissors").off("click");
 			$("#lizard").off("click");
 			$("#spock").off("click");
+			document.getElementById("paperSound").play();
 			compare1();
 		}
 
@@ -356,6 +372,7 @@ database.ref().on("value", function(snapshot) {
 			$("#scissors").off("click");
 			$("#lizard").off("click");
 			$("#spock").off("click");
+			document.getElementById("scissorsSound").play();
 			compare1();
 		}
 
@@ -369,6 +386,7 @@ database.ref().on("value", function(snapshot) {
 			$("#scissors").off("click");
 			$("#lizard").off("click");
 			$("#spock").off("click");
+			document.getElementById("lizardSound").play();
 			compare1();
 		}
 
@@ -382,6 +400,7 @@ database.ref().on("value", function(snapshot) {
 			$("#scissors").off("click");
 			$("#lizard").off("click");
 			$("#spock").off("click");
+			document.getElementById("spockSound").play();
 			compare1();
 		}
 	}
@@ -399,6 +418,11 @@ database.ref().on("value", function(snapshot) {
 		$("#hidden1").text(snapshot.val().move1.move1);
 		$("#hidden2").text(snapshot.val().move2.move2);
 		$("#numPlayers").text(snapshot.val().playerInfo.numPlayers);
+
+
+		if (snapshot.val().move1.move1 !== "0") {
+			$(".selectChoice").attr("class", "row selectChoice");
+		}
 
 		function restartColors() {
 			$("#rock").css("background-color", "transparent");
@@ -467,7 +491,10 @@ database.ref().on("value", function(snapshot) {
 			}
 		}
 
-		$("#clickToStart").click(function() {action2()});
+		$("#clickToStart").click(function() {
+			action2();
+			$(".selectChoice").attr("class", "row selectChoice hvr-bounce-in");
+		});
 
 		function action2() {
 			$("#rock").on("click", function() {rock2()});
@@ -488,6 +515,7 @@ database.ref().on("value", function(snapshot) {
 			$("#scissors").off("click");
 			$("#lizard").off("click");
 			$("#spock").off("click");
+			document.getElementById("rockSound").play();
 			compare2();
 		}
 
@@ -501,6 +529,7 @@ database.ref().on("value", function(snapshot) {
 			$("#scissors").off("click");
 			$("#lizard").off("click");
 			$("#spock").off("click");
+			document.getElementById("paperSound").play();
 			compare2();
 		}
 
@@ -514,6 +543,7 @@ database.ref().on("value", function(snapshot) {
 			$("#scissors").off("click");
 			$("#lizard").off("click");
 			$("#spock").off("click");
+			document.getElementById("scissorsSound").play();
 			compare2();
 		}
 
@@ -527,6 +557,7 @@ database.ref().on("value", function(snapshot) {
 			$("#scissors").off("click");
 			$("#lizard").off("click");
 			$("#spock").off("click");
+			document.getElementById("lizardSound").play();
 			compare2();
 		}
 
@@ -540,6 +571,7 @@ database.ref().on("value", function(snapshot) {
 			$("#scissors").off("click");
 			$("#lizard").off("click");
 			$("#spock").off("click");
+			document.getElementById("spockSound").play();
 			compare2();
 		}
 
@@ -569,6 +601,7 @@ database.ref().on("value", function(snapshot) {
 	    	$("#spock").css("background-color", "transparent");
 	    	$("#hidden1").text("");
 	    	$("#hidden2").text("");
+	    	$(".selectChoice").attr("class", "row selectChoice hvr-bounce-in");
 	    	indic = 0;
 	    	action2();
 		}
@@ -818,16 +851,23 @@ database.ref().on("value", function(snapshot) {
 	}
 });
 
+var soundTrigger = true;
+
 function chat() {
+	soundTrigger = false;
 	database.ref("chat").push({
-		content: $("#yrName").text() + ": " + $("#chatInput").val()
+		content: "<span class=\"chatName\">" + $("#yrName").text() + "</span>: " + $("#chatInput").val()
 	});
 	$("#chatInput").val("");
-	$("#chatContent").scrollTop($("#chatContent")[0].scrollHeight);
 }
 
 database.ref("chat").on("child_added", function(snapshot) {
 	$("#chatContent").append("<br>" + snapshot.val().content);
+	if (soundTrigger) {
+		document.getElementById("chatBell").play();
+	}
+	soundTrigger = true;
+	$("#chatContent").scrollTop($("#chatContent")[0].scrollHeight);
 });
 
 $("#chatSubmit").on("click touchstart", function() {chat()});

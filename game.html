@@ -11,37 +11,43 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12" id="intro">Rock.Paper.Scissors.Lizard.Spock</div>
+		<div class="col-xs-12 hvr-bounce-in" id="rules">Rules</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-4 choices">
-			<div class="row" id="rock">
+			<div class="row selectChoice" id="rock">
 				Rock
 				<br>
 				<img src="assets/images/rock.png" alt="rock">
 			</div>
-			<div class="row" id="paper">
+			<br>
+			<div class="row selectChoice" id="paper">
 				Paper
 				<br>
 				<img src="assets/images/paper.png" alt="paper">
 			</div>
-			<div class="row" id="scissors">
+			<br>
+			<div class="row selectChoice" id="scissors">
 				Scissors
 				<br>
 				<img src="assets/images/scissors.png" alt="scissors">
 			</div>
-			<div class="row" id="lizard">
+			<br>
+			<div class="row selectChoice" id="lizard">
 				Lizard
 				<br>
 				<img src="assets/images/lizard.png" alt="lizard">
 			</div>
-			<div class="row" id="spock">
+			<br>
+			<div class="row selectChoice" id="spock">
 				Spock
 				<br>
 				<img src="assets/images/spock.png" alt="Spock">
 			</div>
 		</div>
 		<div class="col-xs-4 status">
-			<span id="message"></span><span id="clickToStart">Click Here to Start</span>
+			<div id="message"></div>
+			<div class="hvr-bounce-in" id="clickToStart">Click Here to Start</div>
 			<br>
 			<span class="yrName"></span>'s Wins:
 			<br>
@@ -71,11 +77,35 @@
 				<form>
 					<input type="text" id="chatInput">
 				</form>
-				<button id="chatSubmit">Click to Chat</button>
+				<button class="hvr-bounce-in" id="chatSubmit">Click to Chat</button>
 			</div>
 		</div>
 </div>
 </body>
+<audio id="chatBell">
+	<source src="assets/sounds/bell.mp3" type="audio/mpeg">
+</audio>
+<audio id="rockSound">
+	<source src="assets/sounds/rock.mp3" type="audio/mpeg">
+</audio>
+<audio id="paperSound">
+	<source src="assets/sounds/paper.mp3" type="audio/mpeg">
+</audio>
+<audio id="scissorsSound">
+	<source src="assets/sounds/scissors.mp3" type="audio/mpeg">
+</audio>
+<audio id="lizardSound">
+	<source src="assets/sounds/lizard.mp3" type="audio/mpeg">
+</audio>
+<audio id="spockSound">
+	<source src="assets/sounds/spock.mp3" type="audio/mpeg">
+</audio>
+<audio id="loseSound">
+	<source src="assets/sounds/lose.mp3" type="audio/mpeg">
+</audio>
+<audio id="winSound">
+	<source src="assets/sounds/win.mp3" type="audio/mpeg">
+</audio>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
 <script src="assets/js/game.js"></script>

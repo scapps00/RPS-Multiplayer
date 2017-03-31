@@ -20,7 +20,7 @@
        			name1: $("#name").val(),
        			numPlayers: "1"
      		});
-     	location.replace("game.html");
+     	location.replace("holdingroom.html");
  		});
  	}
  	else if (snapshot.val().playerInfo.numPlayers == "1") {
@@ -34,6 +34,10 @@
        			numPlayers: "2"
      		});
      		location.replace("game.html");
+ 		});
+ 	} else if (snapshot.val().playerInfo.numPlayers == "2") {
+ 		$("#submit").on("click touchstart", function() {
+ 			alert("Two people are already playing. Try again later.");
  		});
  	}
  })
