@@ -126,7 +126,7 @@ database.ref().on("value", function(snapshot) {
 	    	$("#spock").css("background-color", "transparent");
 	    	$("#hidden1").text("");
 	    	$("#hidden2").text("");
-	    	$(".selectChoice").attr("class", "row selectChoice")
+	    	$(".selectChoice").attr("class", "row selectChoice hvr-bounce-in");
 	    	indic = 0;
 	    	action1();
 		}

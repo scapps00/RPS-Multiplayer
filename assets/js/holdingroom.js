@@ -17,3 +17,11 @@ database.ref().on("value", function(snapshot) {
 });
 
 });
+window.onunload = function() {
+	database.ref("playerInfo").set({
+		name1: snapshot.val().playerInfo.name1,
+		name2: snapshot.val().playerInfo.name2,
+		score1: 0,
+		score2: 0,
+   		numPlayers: "0"
+   	});
