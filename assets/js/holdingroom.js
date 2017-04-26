@@ -24,4 +24,5 @@ window.onunload = function() {
 		score1: 0,
 		score2: 0,
    		numPlayers: "0"
-   	});
+   });
+}
