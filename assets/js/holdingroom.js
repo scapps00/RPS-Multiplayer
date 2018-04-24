@@ -21,6 +21,7 @@ database.ref("playerInfo").set({
 
 //when window closes, everything resets
 window.onunload = function() {
+	event.preventDefault();
 	database.ref("playerInfo").set({
 		name1: "nobody",
 		name2: "nobody",
