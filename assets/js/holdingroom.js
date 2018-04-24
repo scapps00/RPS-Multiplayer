@@ -11,13 +11,6 @@ var config = {
 
 var database = firebase.database();
 
-//when there are two players registered in Firebase, game.html opens
-database.ref().on("value", function(snapshot) {
-	if (snapshot.val().playerInfo.numPlayers == "2") {
-		location.replace("game.html");
-	}
-});
-
 //when window closes, everything resets
 window.onunload = function() {
 	database.ref("playerInfo").set({
@@ -29,4 +22,10 @@ window.onunload = function() {
 	});
 }
 
+//when there are two players registered in Firebase, game.html opens
+database.ref().on("value", function(snapshot) {
+	if (snapshot.val().playerInfo.numPlayers == "2") {
+		location.replace("game.html");
+	}
+});
 });
