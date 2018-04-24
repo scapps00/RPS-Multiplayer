@@ -11,6 +11,14 @@ var config = {
 
 var database = firebase.database();
 
+database.ref("playerInfo").set({
+	name1: "test",
+	name2: "nobody",
+	score1: 0,
+	score2: 0,
+	numPlayers: "0"
+});
+
 //when window closes, everything resets
 window.onunload = function() {
 	database.ref("playerInfo").set({
