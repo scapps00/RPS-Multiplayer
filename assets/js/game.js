@@ -1,3 +1,4 @@
+//initialize Firebase
 $(document).ready(function() {
 var config = {
     apiKey: "AIzaSyBl08B4TCLkqZuE_tzpEs-qjs7Vn69U6-k",
@@ -10,6 +11,7 @@ var config = {
 
 var database = firebase.database();
 
+//rules alert button
 $("#rules").click(function() {
 	alert("SCISSORS CUT PAPER\nPAPER COVERS ROCK\nROCK CRUSHES LIZARD\nLIZARD POISONS SPOCK\nSPOCK SMASHES SCISSORS\nSCISSORS DECAPITATE LIZARD\nLIZARD EATS PAPER\nPAPER DISPROVES SPOCK\nSPOCK VAPORIZES ROCK\nROCK CRUSHES SCISSORS");
 })
@@ -22,9 +24,6 @@ var indicColors1 = 0;
 var indicColors2 = 0;
 
 database.ref().on("value", function(snapshot) {
-
-
-
 	if (sessionStorage.getItem("playerNum") == "1") {
 		$(".yrName").text(snapshot.val().playerInfo.name1);
 		$(".opName").text(snapshot.val().playerInfo.name2);
@@ -797,6 +796,7 @@ database.ref().on("value", function(snapshot) {
 		}
 	}
 
+	//deletes player from Firebase when window is closed
 	window.onunload = function() {
 		if (snapshot.val().playerInfo.numPlayers == "2") {
 			database.ref("playerInfo").set({
@@ -860,6 +860,7 @@ database.ref().on("value", function(snapshot) {
 
 var soundTrigger = true;
 
+//creates a chat message and sends it to Firebase
 function chat() {
 	soundTrigger = false;
 	database.ref("chat").push({
@@ -868,6 +869,7 @@ function chat() {
 	$("#chatInput").val("");
 }
 
+//when a chat message is added to Firebase, it gets displayed in the DOM
 database.ref("chat").on("child_added", function(snapshot) {
 	$("#chatContent").append("<br>" + snapshot.val().content);
 	if (soundTrigger) {
@@ -879,6 +881,7 @@ database.ref("chat").on("child_added", function(snapshot) {
 
 $("#chatSubmit").on("click touchstart", function() {chat()});
 
+//makes chat submit with enter key
 $(document).keypress(function(event) {
 	if (event.which == 13) {
 		event.preventDefault();

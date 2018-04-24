@@ -1,4 +1,5 @@
-  var config = {
+//initialize Firebase
+var config = {
     apiKey: "AIzaSyBl08B4TCLkqZuE_tzpEs-qjs7Vn69U6-k",
     authDomain: "rpsgame-5f63e.firebaseapp.com",
     databaseURL: "https://rpsgame-5f63e.firebaseio.com",
@@ -9,6 +10,9 @@
 
  var database = firebase.database();
 
+ //if there is not another player registered, holdingroom.html room opens
+ //if there is, game.html opens
+ //if there are already two people playing, error message displays
  database.ref().on("value", function(snapshot) {
  	if (snapshot.val().playerInfo.numPlayers == "0") {
  		sessionStorage.setItem("playerNum", "1");

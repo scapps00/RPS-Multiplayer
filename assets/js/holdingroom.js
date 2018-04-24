@@ -1,3 +1,4 @@
+//initializes Firebase
 $(document).ready(function() {
 var config = {
     apiKey: "AIzaSyBl08B4TCLkqZuE_tzpEs-qjs7Vn69U6-k",
@@ -10,6 +11,7 @@ var config = {
 
 var database = firebase.database();
 
+//when there are two players registered in Firebase, game.html opens
 database.ref().on("value", function(snapshot) {
 	if (snapshot.val().playerInfo.numPlayers == "2") {
 		location.replace("game.html");
@@ -17,10 +19,12 @@ database.ref().on("value", function(snapshot) {
 });
 
 });
+
+//when window is closed, player is deleted from Firebase
 window.onunload = function() {
 	database.ref("playerInfo").set({
-		name1: snapshot.val().playerInfo.name1,
-		name2: snapshot.val().playerInfo.name2,
+		name1: "",
+		name2: "",
 		score1: 0,
 		score2: 0,
    		numPlayers: "0"
