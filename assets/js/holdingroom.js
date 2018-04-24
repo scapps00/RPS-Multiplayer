@@ -16,17 +16,18 @@ database.ref().on("value", function(snapshot) {
 	if (snapshot.val().playerInfo.numPlayers == "2") {
 		location.replace("game.html");
 	}
+});
+
 	
 	//when window is closed, player is deleted from Firebase
 	window.onunload = function() {
-	database.ref("playerInfo").set({
-		name1: "",
-		name2: "",
-		score1: 0,
-		score2: 0,
-   		numPlayers: "0"
-   });
-}
-});
+		database.ref("playerInfo").set({
+			name1: "",
+			name2: "",
+			score1: 0,
+			score2: 0,
+			   numPlayers: "0"
+	   });
+	}
 
 });
