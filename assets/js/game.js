@@ -1,7 +1,7 @@
 //initialize Firebase
 $(document).ready(function() {
 var config = {
-    apiKey: "AIzaSyBl08B4TCLkqZuE_tzpEs-qjs7Vn69U6-k",
+    apiKey: process.env.rpskey,
     authDomain: "rpsgame-5f63e.firebaseapp.com",
     databaseURL: "https://rpsgame-5f63e.firebaseio.com",
     storageBucket: "rpsgame-5f63e.appspot.com",
