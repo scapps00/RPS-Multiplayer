@@ -1,6 +1,6 @@
 # Rock-Paper-Scissors-Lizard-Spock Multiplayer Game
 
-My first Firebase project. Play Rock-Paper-Scissors-Lizard-Spock with a stranger or a friend. Includes a chat features.
+My first Firebase project. Play Rock-Paper-Scissors-Lizard-Spock with a stranger or a friend. Includes a chat feature.
 
 ## Getting Started
 
@@ -14,6 +14,7 @@ If you are using your own database, get a Firebase account at firebase.google.co
 
 The template for the Firebae database is as follows:
 
+```
 {
   "move1" : {
     "move1" : "0"
@@ -41,6 +42,7 @@ The template for the Firebae database is as follows:
     "visible2" : ""
   }
 }
+```
 
 Replace my Firebase connection info with your own in each JavaScript file.
 
