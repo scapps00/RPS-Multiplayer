@@ -1,7 +1,18 @@
 //initializes Firebase
 $(document).ready(function() {
+
+	var rpslskey = "";
+
+	//gets Firebase database key
+	$.ajax({
+		method: "GET",
+		url: "../rpslskey"
+	}).done(function(result) {
+		rpslskey = result;
+	});
+
 var config = {
-    apiKey: process.env.rpskey,
+    apiKey: rpslskey,
     authDomain: "rpsgame-5f63e.firebaseapp.com",
     databaseURL: "https://rpsgame-5f63e.firebaseio.com",
     storageBucket: "rpsgame-5f63e.appspot.com",
@@ -10,14 +21,6 @@ var config = {
   firebase.initializeApp(config);
 
 var database = firebase.database();
-
-database.ref("playerInfo").set({
-	name1: "test",
-	name2: "nobody",
-	score1: 0,
-	score2: 0,
-	numPlayers: "0"
-});
 
 //when window closes, everything resets
 window.onunload = function() {
