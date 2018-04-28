@@ -61,7 +61,7 @@ I hid my API key for deployment using Config Variables in Heroku. Use whatever m
 
 ## Authors
 
-* **Samantha Capps** (https://github.com/scapps00) with guidance from the UNC Coding Bootcamp 2017
+* **Samantha Capps** (https://github.com/scapps00) based on an assignment from the UNC Coding Bootcamp 2017
 
 ## License
 
