@@ -1,24 +1,11 @@
 //initializes Firebase
 $(document).ready(function() {
 
-	var rpslskey = "";
-
-	//gets Firebase database key
-	$.ajax({
-		method: "GET",
-		url: "../rpslskey"
-	}).done(function(result) {
-		rpslskey = result;
-	});
-
 var config = {
-    apiKey: rpslskey,
-    authDomain: "rpsgame-5f63e.firebaseapp.com",
-    databaseURL: "https://rpsgame-5f63e.firebaseio.com",
-    storageBucket: "rpsgame-5f63e.appspot.com",
-    messagingSenderId: "603451137166"
-  };
-  firebase.initializeApp(config);
+	//insert Firebase connection config
+};
+
+firebase.initializeApp(config);
 
 var database = firebase.database();
 
